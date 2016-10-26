@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © PART <info@part-online.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<ruleset name="Part_NoCategoryFilter">
+    <description>Part_NoCategoryFilter coding standards</description>
+    <arg value="p"/>
+    <arg name="colors"/>
+    <rule ref="PSR2"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <file>Model</file>
+    <file>Test</file>
+</ruleset>

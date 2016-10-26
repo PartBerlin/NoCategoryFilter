@@ -1,0 +1,31 @@
+dist: trusty
+
+language: php
+
+sudo: false
+
+php:
+    - 5.6
+    - 7.0
+
+env:
+    global:
+        - secure: "fwy5gi2fe06oDsxmkczpbgVXQDeuMIZZ7vekittZP1BudNp1lkBoVAhbaNTI4CX6ztb8UHSqty4jG2g185koSLfYz/ZFA2sXFPMMj50gdH2HSMpLp8iHz5YmOJYB6zVaIV4RnGI4hE++A0Cm+8XkoHZm4VwykNL5o4Q1BDxHMHy86Rkqmrv/LeDzF+eNJ4jIr3m3ER33uxLWlu0IiGE2k8wQzKl332za2jfZGRSJEimaVsp5Fm7DIkGRW+OY0Dyeg/XFYA5pq5YoSt1+chUKS8LmEF+EDKqQCJSPLGBVjI0+SIYIj0681VdLv5c1EpyH1nQgWqGb5Cj9LMyuA/eC4QB+k2bsC0oahOqoD5w2UGLhsImJu8uAxH/1Wn4/3zg/csIHKJtQJAimaDKb4YznwrT+bMI4r4/DNadky5B8iGfoE5Z5qVfi9UMhUoIF9yGiNtuuuK4NdUwxEbrYw9MdO0/YdrgSzBheThjGod3Xr/Sa3l1hUaUEQR7TFE6QklN7u5+sUcFinURGEUt4nup6fHJolz4lcnM/3baZB0EOAXWW5/iiBa38KLzAwKTnoEVUm+E4YwamLPB91CiPbfzpo7UovoS88oholKNXtt3Sf5+zaKLtaA3yjTLrFJP4VuuMNHVjIFVHDZnwMPpE3LZ20de/sxxqovWHzGQwx+gBg+A="
+        - secure: "F8i57nAojOc/8OpuinJUZrD+r3B5yKiHDOzs8RuGayIDWJ7earunDLIuWPeGKpQmoQTOVL/R18u/SCQuOrWd215ZWu1vVmHr409rssW86iafNup6WJFUe7yPANOStas33AYzV4zCQoDqM869Qt73iaUAD+ZIzvcr6umy+YQTModbujLv8hhP0J1/Gzyg05x6+IfWvsXXEkBSBtbDeUAaFc1hmBIWtm8MXVqUJOYLLQexpMGVxkXDY096HSkGUKX749j9HPdgP6A4+XBz/euk1PUe3K/nGTNDaIWsi2GghDt8+8Uf0C5qUIrvqvzN6et4gX457oxvzjoB4Yb5a28I9IifgV42O8R7RbbkgfnfDUYDlTXhYghKFaAqh33q7B3YvFq0h0A9+Nu2QMHV84VzSpJvuD4SSavZp9fG6cszranzxJzxLwjFU/yTDyGQ0XRdbIwDemM8JrNHwW1Lc9OGniRnju9uwru6KkXgfn9JwKK38omZx5cV4QPxaRssHxr6L1oIdbIqDxytNmwTMHHMi72QfF3U8mjD+r54qRj3GJXWLRqub6lAXnzpE12aPMyWW0wqJr7vI+Ax28bOoyLPPWlvnz9wn7zZ1ZFzNPajjMAth1J1HwVbDgaxWkEJ+Hr7iELsWTytoy/Vh2SrAkCjWpOv6A4XNc6D0COzIdmxelg="
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+install:
+    - echo "{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_USERNAME}\",\"password\":\"${MAGENTO_PASSWORD}\"}}}" > auth.json
+    - composer install --prefer-dist
+
+script:
+    - php vendor/bin/phpcs
+    - php vendor/bin/phpmd Model/,Test/ text cleancode,codesize,controversial,design,naming,unusedcode
+    - php vendor/bin/phpcpd Model/ Test/
+    - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+    - php vendor/bin/coveralls

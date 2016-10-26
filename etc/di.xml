@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © PART <info@part-online.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="categoryFilterList" type="Part\NoCategoryFilter\Model\Catalog\Layer\FilterList"></virtualType>
+    <virtualType name="searchFilterList" type="Part\NoCategoryFilter\Model\Catalog\Layer\FilterList"></virtualType>
+</config>
