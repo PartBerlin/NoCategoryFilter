@@ -33,7 +33,7 @@ class FilterListTest extends \PHPUnit_Framework_TestCase
     protected $layerMock;
 
     /**
-     * @var \Magento\Catalog\Model\Layer\FilterList
+     * @var \Part\NoCategoryFilter\Model\Catalog\Layer\FilterList
      */
     protected $model;
 
@@ -69,9 +69,7 @@ class FilterListTest extends \PHPUnit_Framework_TestCase
      * @param string $expectedClass
      * @dataProvider getFiltersDataProvider
      *
-     * @covers \Magento\Catalog\Model\Layer\FilterList::getFilters
-     * @covers \Magento\Catalog\Model\Layer\FilterList::createAttributeFilter
-     * @covers \Magento\Catalog\Model\Layer\FilterList::__construct
+     * @covers \Part\NoCategoryFilter\Model\Catalog\Layer\FilterList::getFilters
      */
     public function testGetFilters($method, $value, $expectedClass)
     {
